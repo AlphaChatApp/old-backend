@@ -1,0 +1,48 @@
+<% include partials/header %>
+
+    <!-- Page Content -->
+    <% include partials/channel_section %>
+
+
+    <div id="page">
+		<div id="chat-list">
+		
+		</div>
+            <ul class="chat-list scroll-hijack">
+                    <% channel.participant.forEach(function(participant){ %>
+
+                    <% }); %>
+            </ul>
+        <div id="chat" class="page">
+            <div class="page-header clearfix">
+                <span><%= channel.channel_name %></span>
+                <ul>
+								<a href="/channel/invite/<%= channel._id%>" class="btn btn-primary">Invite People</a>
+								<a href="/channel/remove/<%= channel._id%>" class="btn btn-primary">Leave Server</a>
+                   <!-- <li><a title="Online" href="#">Online -  rUser.online %></a></li>-->
+                </ul>
+            </div>
+            <div class="chat-body scroll-hijack">
+                    <% channel.message.forEach(function(message){ %>
+                        <div class="chat-message">
+                                <div class="avatar"><img src="<%= message.author.profile_picture %>" /></div>
+                                <div class="chat-message-content">
+                                    <a href="/users/<%= message.author._id %>" class="chat-message-author"><%= message.author.username %></a>
+                                    <span class="chat-message-date"><%= moment(message.created_at).format("lll")  %></span>
+                                    <div class="chat-message-message">
+                                            <%= message.text %>  
+                                    </div>
+                                </div>
+                        </div>
+                    <% }); %>
+            </div>
+            <div class="chat-footer relative">
+                <form id="message-form" action="">
+                    <input name="message" type="text" class="post-input" placeholder="Message <%= channel.channel_name%>" />
+                    <button type="submit" class="post-button"><span class="caret-right"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<% include partials/footer %>

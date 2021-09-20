@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+    <!-- Page Content -->
+    <div class="invitation">
+        <div class="invitation-header">
+            Invite Friends to <%= channel.channel_name %>
+        </div>
+        <div class="invitation-info">
+            <div class="col">
+                <div class="group-avatar"><img src="/img/placeholder-avatar2.jpg" /></div>
+            </div>
+            <div class="col">
+                <h6 class="mb-10"><%= channel.channel_name %></h6>
+                <ul class="group-stats">
+                    <li><%= channel.participant.length %> users registered</li>
+                    <% var count = 0; %>
+                    <% channel.participant.forEach(function(participant){ %>
+                        <% if(participant.online === true){ %>
+                            <% count++ ; %>
+                        <% } %>
+                    <% }); %>
+                    <li><%= count %> online users</li>
+                </ul>
+                <a href="/" class="decline link-underline">Cancel Invitation</a>
+            </div>
+        </div>
+        <div class="invitation-join">
+				<div class="invitation-header">
+            https://zerocord.zerofamily.repl.co/channel/join/<%= channel.id %>
+        </div>
+                <form action="/channel/invite/<%= channel._id %>" method="POST">
+                    <button type="submit" class="btn btn-block btn-primary">Invite</button>
+                </form> 
+								
+        </div>
+    </div>
+<script>
+</script>
+
+<% include partials/footer %>
+
